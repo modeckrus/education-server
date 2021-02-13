@@ -1,0 +1,2 @@
+port = "8080"
+mongodb_addr = "mongodb://localhost:27003"

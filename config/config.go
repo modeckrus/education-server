@@ -2,8 +2,10 @@ package config
 
 //ServerConfig ...
 type ServerConfig struct {
-	Port        string `toml:"port"`
-	MongodbAddr string `toml:"mongodb_addr"`
+	Port           string `toml:"port"`
+	MongodbAddr    string `toml:"mongodb_addr"`
+	FirebaseConfig string `toml:"firebase_config"`
+	KeyPem         string `toml:"key_pem"`
 }
 
 // port = "8080"
@@ -16,7 +18,9 @@ type ServerConfig struct {
 //NewServerConfig ...
 func NewServerConfig() ServerConfig {
 	return ServerConfig{
-		Port:        "8080",
-		MongodbAddr: "mongodb://localhost:27003",
+		Port:           "8080",
+		MongodbAddr:    "mongodb://localhost:27003",
+		FirebaseConfig: "/home/modeck/Documents/secure/serviceAccount.json",
+		KeyPem:         "/home/modeck/Documents/secure/key.pem",
 	}
 }

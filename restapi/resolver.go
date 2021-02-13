@@ -1,6 +1,9 @@
 package restapi
 
-import "education/database"
+import (
+	"education/config"
+	"education/database"
+)
 
 //Resolver ...
 type Resolver struct {
@@ -8,8 +11,8 @@ type Resolver struct {
 }
 
 //NewResolver ...
-func NewResolver() *Resolver {
-	db := database.Connect("mongodb://localhost:27003")
+func NewResolver(conf config.ServerConfig) *Resolver {
+	db := database.Connect(conf)
 	return &Resolver{
 		DB: *db,
 	}

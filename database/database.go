@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"education/config"
 	"fmt"
 	"image"
 	"image/gif"
@@ -36,11 +37,11 @@ type DB struct {
 }
 
 //Connect to the mongodb and firebase
-func Connect(addr string) *DB {
+func Connect(conf config.ServerConfig) *DB {
 	var err error
 	var client *mongo.Client
 
-	client, err = mongo.NewClient(options.Client().ApplyURI(addr))
+	client, err = mongo.NewClient(options.Client().ApplyURI(conf.MongodbAddr))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -58,7 +59,7 @@ func Connect(addr string) *DB {
 	// }()
 	fmt.Println("Firebase Initialize")
 
-	opt := option.WithCredentialsFile("/home/modeck/go/src/education/serviceAccount.json")
+	opt := option.WithCredentialsFile(conf.FirebaseConfig)
 	app, err := firebase.NewApp(context.Background(), nil, opt)
 	if err != nil {
 		log.Fatal(fmt.Errorf("error initializing app: %v", err))
@@ -73,7 +74,7 @@ func Connect(addr string) *DB {
 		log.Fatal(err)
 	}
 
-	keypem, err := os.Open("/home/modeck/go/src/education/key.pem")
+	keypem, err := os.Open(conf.KeyPem)
 	if err != nil {
 		log.Println("Error while opening key.pem")
 		log.Fatal(err)

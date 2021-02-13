@@ -29,7 +29,7 @@ func init() {
 
 func main() {
 	r := mux.NewRouter()
-	db := database.Connect(serverConfig.MongodbAddr)
+	db := database.Connect(serverConfig)
 	resolver := restapi.Resolver{
 		DB: *db,
 	}

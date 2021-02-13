@@ -1,2 +1,4 @@
 port = "8080"
 mongodb_addr = "mongodb://localhost:27003"
+firebase_config = "/home/modeck/Documents/secure/serviceAccount.json"
+key_pem = "/home/modeck/Documents/secure/key.pem"

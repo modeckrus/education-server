@@ -2,6 +2,7 @@ package restapi_test
 
 import (
 	"bytes"
+	"education/config"
 	"education/model"
 	"education/restapi"
 	"encoding/json"
@@ -39,7 +40,8 @@ func TestFirebaseAuth(t *testing.T) {
 	}
 	req.Header.Set("Content-Type", "application/json")
 	rr := httptest.NewRecorder()
-	g := restapi.NewResolver()
+	conf := config.NewServerConfig()
+	g := restapi.NewResolver(conf)
 	handler := http.HandlerFunc(g.FirebaseAuth)
 	handler.ServeHTTP(rr, req)
 	if status := rr.Code; status != http.StatusOK {

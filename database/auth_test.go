@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"education/config"
 	"education/model"
 	"testing"
 )
@@ -38,7 +39,8 @@ func TestDB_UpdateUser(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			db := Connect("mongodb://localhost:27003")
+			conf := config.NewServerConfig()
+			db := Connect(conf)
 			got, err := db.UpdateUser(tt.args.ctx, tt.args.currUser, tt.args.name, tt.args.displayName, tt.args.iphotoID)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("DB.UpdateUser() error = %v, wantErr %v", err, tt.wantErr)
